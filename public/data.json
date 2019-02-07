@@ -1,0 +1,16 @@
+[
+	{
+		"clientId": 1234,
+		"b2cId": "abc",
+		"accountNumber": 12345,
+		"cisId": 123456,
+		"aacountId": 1234567
+    },
+    {
+		"clientId": 2234,
+		"b2cId": "abcd",
+		"accountNumber": 22345,
+		"cisId": 223456,
+		"aacountId": 2234567
+	}
+]
