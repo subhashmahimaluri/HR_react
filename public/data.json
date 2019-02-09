@@ -2,29 +2,49 @@
 	{
 		"clientId": "1",
 		"b2cId": "abc",
-		"accountNumber": "12345",
 		"cisId": "a",
-		"aacountId": "1234567"
+		"registrationTS": "1234567",
+		"accountId": "1234567",
+		"productLongName": "testLong",
+		"productShortName": "testShort",
+		"customerRole": "testCR",
+		"accountNumber": "12345",
+		"agreementId": "testAGGId"
 	},
 	{
 		"clientId": "1",
 		"b2cId": "abc",
-		"accountNumber": "12345",
 		"cisId": "b",
-		"aacountId": "1234567"
+		"registrationTS": "12345678",
+		"accountId": "12345678",
+		"productLongName": "testLong2",
+		"productShortName": "testShort2",
+		"customerRole": "testCR2",
+		"accountNumber": "123452",
+		"agreementId": "testAGGId2"
 	},
 	{
 		"clientId": "2",
 		"b2cId": "abc",
-		"accountNumber": "12345",
 		"cisId": "c",
-		"aacountId": "1234567"
+		"registrationTS": "123456789",
+		"accountId": "123456789",
+		"productLongName": "testLong3",
+		"productShortName": "testShort",
+		"customerRole": "testCR3",
+		"accountNumber": "123453",
+		"agreementId": "testAGGId3"
 	},
 	{
 		"clientId": "2234",
 		"b2cId": "abcd",
-		"accountNumber": "22345",
 		"cisId": "223456",
-		"aacountId": "2234567"
+		"registrationTS": "1234567890",
+		"accountId": "1234567899",
+		"productLongName": "testLong4",
+		"productShortName": "testShort4",
+		"customerRole": "testCR4",
+		"accountNumber": "123454",
+		"agreementId": "testAGGId4"
 	}
 ]
