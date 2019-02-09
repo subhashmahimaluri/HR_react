@@ -6,9 +6,6 @@ class Search extends Component {
     constructor() {
         super();
         this.state = {
-            b2cId: "",
-            clientId: "",
-            cISId: "",
             data: [],
             filteredData: []
         }
@@ -31,26 +28,24 @@ class Search extends Component {
         evt.preventDefault();
         const b2cId = this.b2cId.current.value;
         const clientId = this.clientId.current.value;
-        const cisId = this.b2cId.current.value;
-        if (b2cId && b2cId.length > 0) {
-            this.setState({ b2cId });
-        }
-        if (clientId && clientId.length > 0) {
-            this.setState({ clientId });
-        }
-        if (cisId && cisId.length > 0) {
-            this.setState({ cisId });
-        }
-        const filteredData = this.filterByVal(b2cId)
+        const cisId = this.cisId.current.value;
+        const filteredData = this.filterByVal(b2cId, clientId, cisId)
         this.setState({filteredData});
     }
 
-    filterByVal = (b2cId) => {
+    filterByVal = (b2cId, clientId, cisId) => {
         const rawData = this.state.data.length ? this.state.data : [];
-        if(rawData && b2cId) {
-            return rawData.filter(data=>data.b2cId===b2cId);
+        let results = [];
+        if(rawData && b2cId !== '') {
+            results = rawData.filter(data=>data.b2cId===b2cId);
+            if(clientId !== '') {
+                results = results.filter(data=>data.clientId===clientId);
+                if(cisId !== '') {
+                    results = results.filter(data=>data.cisId===cisId);
+                }
+            }
         }
-        return null;
+        return results;
     }
 
     render() {
