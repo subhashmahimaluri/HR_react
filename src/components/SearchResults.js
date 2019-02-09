@@ -2,19 +2,9 @@ import React, { Component } from 'react';
 
 class SearchResults extends Component {
     render() {
-        const tableOne = !this.props.results.length ? '' : (
-            this.props.results.map((item, index) => (
-                <tr key={index}>
-                    <td>{item.clientId}</td>
-                    <td>{item.b2cId}</td>
-                    <td>{item.registrationTS}</td>
-                    <td>{item.cisId}</td>
-                </tr>
-            ))
-        );
-
-        const tableTwo = !this.props.results.length ? '' : (
-            this.props.results.map((item, index) => (
+        const { results } = this.props;
+        const tableTwo = !results.length ? '' : (
+            results.map((item, index) => (
                 <tr key={index}>
                     <td>{item.accountNumber}</td>
                     <td>{item.productLongName}</td>
@@ -25,19 +15,16 @@ class SearchResults extends Component {
                 </tr>
             ))
         );
-
-        const results = !this.props.results.length ? '' : (
+        const resultsTable = !results.length ? '' : (
             <div>
                 <table className="tableOne" border="1">
                     <tbody>
-                        <tr><td colSpan="4">User Identity Results</td></tr>
-                        <tr>
-                            <th>Client ID</th>
-                            <th>B2CID</th>
-                            <th>Registration Timestamp</th>
-                            <th>CIS ID</th>
-                        </tr>
-                        {tableOne}
+                        <tr><td colSpan="2">User Identity Results</td></tr>
+                        <tr><td>Client ID</td><td>{results[0].clientId}</td></tr>
+                        <tr><td>B2CID</td><td>{results[0].b2cId}</td></tr>
+                        <tr><td>CIS ID</td><td>{results[0].cisId}</td></tr>
+                        <tr><td>Registration Timestamp</td><td>{results[0].registrationTS}</td></tr>
+                        <tr><td>Verification Status</td><td>{results[0].varificationStatus}</td></tr>
                     </tbody>
                 </table>
                 <table className="tableTwo" border="1">
@@ -61,7 +48,7 @@ class SearchResults extends Component {
             <div className="-oneX-container">
                 <div className="-oneX-col-md-12">
                     <h3> bank enablement support</h3>
-                    {results}
+                    {resultsTable}
                 </div>
             </div>
         );
