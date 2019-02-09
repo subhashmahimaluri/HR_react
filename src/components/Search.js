@@ -34,15 +34,30 @@ class Search extends Component {
     }
 
     filterByVal = (b2cId, clientId, cisId) => {
+        var query = {b2cId, clientId, cisId};
         const rawData = this.state.data.length ? this.state.data : [];
         let results = [];
-        if(rawData && b2cId !== '') {
-            results = rawData.filter(data=>data.b2cId===b2cId);
-            if(clientId !== '') {
-                results = results.filter(data=>data.clientId===clientId);
-                if(cisId !== '') {
-                    results = results.filter(data=>data.cisId===cisId);
+        if(rawData.length) {
+            if (b2cId !== '') {
+                results = rawData.filter(data => data.b2cId === b2cId);
+                if (clientId !== '') {
+                    results = results.filter(data => data.clientId === clientId);
+                    if (cisId !== '') {
+                        results = results.filter(data => data.cisId === cisId);
+                    }
                 }
+                else if(cisId !== '') {
+                    results = results.filter(data => data.cisId === cisId);
+                }
+            }
+            else if (clientId !== '') {
+                results = rawData.filter(data => data.clientId === clientId);
+                if (cisId !== '') {
+                    results = results.filter(data => data.cisId === cisId);
+                }
+            }
+            else if (cisId !== '') {
+                results = rawData.filter(data => data.cisId === cisId);
             }
         }
         return results;
