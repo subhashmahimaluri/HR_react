@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchResults from './SearchResults';
+import axios from 'axios';
 
 class Search extends Component {
 
@@ -7,7 +8,8 @@ class Search extends Component {
         super();
         this.state = {
             data: [],
-            filteredData: []
+            filteredData: [],
+            results: [],
         }
         this.b2cId = React.createRef();
         this.clientId = React.createRef();
@@ -15,6 +17,8 @@ class Search extends Component {
     }
 
     componentDidMount() {
+        const result = this.soapRequest();
+        console.log('state', this.state);
         fetch('/data.json')
             .then(res => res.json())
             .then(this.onLoad);
@@ -24,6 +28,11 @@ class Search extends Component {
         this.setState({ data });
     }
 
+    setResults = (data) => {
+        const results = this.state.results.push(data);
+        this.setState({ results });
+    }
+
     submitHandler = (evt) => {
         evt.preventDefault();
         const b2cId = this.b2cId.current.value;
@@ -31,6 +40,32 @@ class Search extends Component {
         const cisId = this.cisId.current.value;
         const filteredData = this.filterByVal(b2cId, clientId, cisId)
         this.setState({filteredData});
+    }
+
+    soapRequest = () => {
+        let xmls = `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+        <Body>
+            <Multiply xmlns="http://tempuri.org/">
+                <intA>2</intA>
+                <intB>5</intB>
+            </Multiply>
+        </Body>
+    </Envelope>`;
+        var requestArgs = {
+            "countryCode": 'UK',
+        };
+
+        axios.post('http://www.dneonline.com/calculator.asmx?WSDL',
+            xmls,
+            {
+                headers:
+                    { 'Content-Type': 'text/xml', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', }
+            }).then(res => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(res.data, "text/xml");
+                let formsList = xmlDoc.getElementsByTagName("MultiplyResult")[0];
+                this.setResults(formsList.childNodes[0].data);
+            }).catch(err => { console.log(err) });
     }
 
     filterByVal = (b2cId, clientId, cisId) => {
